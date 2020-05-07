@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.6.6 on darwin)" generated="20200507 11:55:25.866" rpa="false">
+<suite id="s1" name="Tests" source="/Users/alissonsantana/Desktop/poc_robot_framework/robot-framework-api/tests">
+<suite id="s1-s1" name="Weather" source="/Users/alissonsantana/Desktop/poc_robot_framework/robot-framework-api/tests/weather.robot">
+<test id="s1-s1-t1" name="Cenário: GET weather by city name">
+<kw name="Quando realizar um GET para o endpoint get_weather_by_city_name" library="kw_weather">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${HOST_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>cookies=${headers}</arg>
+<arg>verify=false</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200507 11:55:26.625" level="INFO">Creating Session using : alias=weather, url=https://samples.openweathermap.org/data/2.5, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'},                     cookies={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200507 11:55:26.624" endtime="20200507 11:55:26.625"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${GET_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>params=${city_name}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200507 11:55:27.702" level="INFO">Get Request using : alias=weather, uri=/weather, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'} json=None</msg>
+<msg timestamp="20200507 11:55:27.702" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:26.626" endtime="20200507 11:55:27.702"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:27.704" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:27.703" endtime="20200507 11:55:27.704"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:26.623" endtime="20200507 11:55:27.704"></status>
+</kw>
+<kw name="Então validar o retorno da requisição GET para o endpoint get_weather_by_city_name" library="kw_weather">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:27.707" level="INFO">Length is 12</msg>
+<status status="PASS" starttime="20200507 11:55:27.706" endtime="20200507 11:55:27.707"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<assign>
+<var>${SUCCESS_STATUS_CODE}</var>
+</assign>
+<msg timestamp="20200507 11:55:27.708" level="INFO">${SUCCESS_STATUS_CODE} = 200</msg>
+<status status="PASS" starttime="20200507 11:55:27.707" endtime="20200507 11:55:27.708"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${SUCCESS_STATUS_CODE}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.708" endtime="20200507 11:55:27.709"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>coord</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.710" endtime="20200507 11:55:27.711"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>weather</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.711" endtime="20200507 11:55:27.712"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>id</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.712" endtime="20200507 11:55:27.713"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>main</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.713" endtime="20200507 11:55:27.714"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>base</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.715" endtime="20200507 11:55:27.715"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>visibility</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.716" endtime="20200507 11:55:27.716"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>wind</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.717" endtime="20200507 11:55:27.717"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>clouds</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.718" endtime="20200507 11:55:27.718"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>dt</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.719" endtime="20200507 11:55:27.719"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>sys</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.719" endtime="20200507 11:55:27.720"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>name</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.720" endtime="20200507 11:55:27.721"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cod</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:27.721" endtime="20200507 11:55:27.721"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:27.705" endtime="20200507 11:55:27.721"></status>
+</kw>
+<tags>
+<tag>get_weather_by_city_name</tag>
+<tag>weather</tag>
+</tags>
+<status status="PASS" starttime="20200507 11:55:26.622" endtime="20200507 11:55:27.722" critical="yes"></status>
+</test>
+<test id="s1-s1-t2" name="Cenário: GET weather by geographic coordinates">
+<kw name="Quando realizar um GET para o endpoint get_weather_by_geo_coord" library="kw_weather">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${HOST_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>cookies=${headers}</arg>
+<arg>verify=false</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200507 11:55:27.724" level="INFO">Creating Session using : alias=weather, url=https://samples.openweathermap.org/data/2.5, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'},                     cookies={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200507 11:55:27.724" endtime="20200507 11:55:27.725"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${GET_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>params=${geo_coord}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200507 11:55:28.905" level="INFO">Get Request using : alias=weather, uri=/weather, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'} json=None</msg>
+<msg timestamp="20200507 11:55:28.905" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:27.725" endtime="20200507 11:55:28.906"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:28.907" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:28.906" endtime="20200507 11:55:28.907"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:27.723" endtime="20200507 11:55:28.907"></status>
+</kw>
+<kw name="Então validar o retorno da requisição GET para o endpoint get_weather_by_geo_coord" library="kw_weather">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:28.909" level="INFO">Length is 11</msg>
+<status status="PASS" starttime="20200507 11:55:28.908" endtime="20200507 11:55:28.909"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<assign>
+<var>${SUCCESS_STATUS_CODE}</var>
+</assign>
+<msg timestamp="20200507 11:55:28.910" level="INFO">${SUCCESS_STATUS_CODE} = 200</msg>
+<status status="PASS" starttime="20200507 11:55:28.910" endtime="20200507 11:55:28.911"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${SUCCESS_STATUS_CODE}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.911" endtime="20200507 11:55:28.912"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>coord</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.913" endtime="20200507 11:55:28.914"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>weather</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.914" endtime="20200507 11:55:28.915"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>id</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.915" endtime="20200507 11:55:28.916"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>main</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.917" endtime="20200507 11:55:28.918"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>base</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.918" endtime="20200507 11:55:28.919"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>wind</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.919" endtime="20200507 11:55:28.920"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>clouds</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.920" endtime="20200507 11:55:28.921"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>dt</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.921" endtime="20200507 11:55:28.921"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>sys</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.921" endtime="20200507 11:55:28.922"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>name</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.922" endtime="20200507 11:55:28.922"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cod</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:28.923" endtime="20200507 11:55:28.923"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:28.907" endtime="20200507 11:55:28.923"></status>
+</kw>
+<tags>
+<tag>get_weather_by_geo_coord</tag>
+<tag>weather</tag>
+</tags>
+<status status="PASS" starttime="20200507 11:55:27.722" endtime="20200507 11:55:28.924" critical="yes"></status>
+</test>
+<test id="s1-s1-t3" name="Cenário: GET weather by city id">
+<kw name="Quando realizar um GET para o endpoint get_weather_by_city_id" library="kw_weather">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${HOST_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>cookies=${headers}</arg>
+<arg>verify=false</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200507 11:55:28.927" level="INFO">Creating Session using : alias=weather, url=https://samples.openweathermap.org/data/2.5, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'},                     cookies={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200507 11:55:28.927" endtime="20200507 11:55:28.928"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${GET_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>params=${city_id}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200507 11:55:29.969" level="INFO">Get Request using : alias=weather, uri=/weather, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'} json=None</msg>
+<msg timestamp="20200507 11:55:29.970" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:28.929" endtime="20200507 11:55:29.970"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:29.971" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:29.970" endtime="20200507 11:55:29.971"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:28.925" endtime="20200507 11:55:29.971"></status>
+</kw>
+<kw name="Então validar o retorno da requisição GET para o endpoint get_weather_by_city_id" library="kw_weather">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:29.973" level="INFO">Length is 12</msg>
+<status status="PASS" starttime="20200507 11:55:29.973" endtime="20200507 11:55:29.973"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<assign>
+<var>${SUCCESS_STATUS_CODE}</var>
+</assign>
+<msg timestamp="20200507 11:55:29.974" level="INFO">${SUCCESS_STATUS_CODE} = 200</msg>
+<status status="PASS" starttime="20200507 11:55:29.974" endtime="20200507 11:55:29.974"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${SUCCESS_STATUS_CODE}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.975" endtime="20200507 11:55:29.976"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>coord</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.977" endtime="20200507 11:55:29.978"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>weather</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.978" endtime="20200507 11:55:29.979"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>id</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.980" endtime="20200507 11:55:29.981"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>main</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.981" endtime="20200507 11:55:29.982"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>base</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.982" endtime="20200507 11:55:29.983"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>wind</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.983" endtime="20200507 11:55:29.984"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>clouds</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.984" endtime="20200507 11:55:29.984"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>dt</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.984" endtime="20200507 11:55:29.985"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>sys</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.985" endtime="20200507 11:55:29.986"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>name</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.986" endtime="20200507 11:55:29.986"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cod</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:29.986" endtime="20200507 11:55:29.987"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:29.972" endtime="20200507 11:55:29.987"></status>
+</kw>
+<tags>
+<tag>get_weather_by_city_id</tag>
+<tag>weather</tag>
+</tags>
+<status status="PASS" starttime="20200507 11:55:28.924" endtime="20200507 11:55:29.987" critical="yes"></status>
+</test>
+<test id="s1-s1-t4" name="Cenário: GET weather by ZIP">
+<kw name="Quando realizar um GET para o endpoint get_weather_by_city_zip" library="kw_weather">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${HOST_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>cookies=${headers}</arg>
+<arg>verify=false</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200507 11:55:29.990" level="INFO">Creating Session using : alias=weather, url=https://samples.openweathermap.org/data/2.5, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'},                     cookies={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200507 11:55:29.989" endtime="20200507 11:55:29.991"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${GET_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>params=${city_zip}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200507 11:55:31.055" level="INFO">Get Request using : alias=weather, uri=/weather, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'} json=None</msg>
+<msg timestamp="20200507 11:55:31.056" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:29.991" endtime="20200507 11:55:31.056"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:31.057" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:31.056" endtime="20200507 11:55:31.057"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:29.988" endtime="20200507 11:55:31.058"></status>
+</kw>
+<kw name="Então validar o retorno da requisição GET para o endpoint get_weather_by_city_zip" library="kw_weather">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:31.059" level="INFO">Length is 12</msg>
+<status status="PASS" starttime="20200507 11:55:31.059" endtime="20200507 11:55:31.060"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<assign>
+<var>${SUCCESS_STATUS_CODE}</var>
+</assign>
+<msg timestamp="20200507 11:55:31.060" level="INFO">${SUCCESS_STATUS_CODE} = 200</msg>
+<status status="PASS" starttime="20200507 11:55:31.060" endtime="20200507 11:55:31.061"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${SUCCESS_STATUS_CODE}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.061" endtime="20200507 11:55:31.062"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>coord</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.062" endtime="20200507 11:55:31.063"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>weather</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.064" endtime="20200507 11:55:31.065"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>id</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.065" endtime="20200507 11:55:31.066"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>main</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.067" endtime="20200507 11:55:31.068"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>base</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.068" endtime="20200507 11:55:31.069"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>wind</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.069" endtime="20200507 11:55:31.069"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>clouds</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.069" endtime="20200507 11:55:31.070"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>dt</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.070" endtime="20200507 11:55:31.070"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>sys</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.070" endtime="20200507 11:55:31.071"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>name</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.071" endtime="20200507 11:55:31.072"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cod</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:31.072" endtime="20200507 11:55:31.072"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:31.058" endtime="20200507 11:55:31.073"></status>
+</kw>
+<tags>
+<tag>get_weather_by_city_zip</tag>
+<tag>weather</tag>
+</tags>
+<status status="PASS" starttime="20200507 11:55:29.988" endtime="20200507 11:55:31.073" critical="yes"></status>
+</test>
+<test id="s1-s1-t5" name="Cenário: GET weather of cities within a rectangle zone">
+<kw name="Quando realizar um GET para o endpoint get_weather_rectangle_zone" library="kw_weather">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${HOST_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>cookies=${headers}</arg>
+<arg>verify=false</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200507 11:55:31.076" level="INFO">Creating Session using : alias=weather, url=https://samples.openweathermap.org/data/2.5, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'},                     cookies={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200507 11:55:31.075" endtime="20200507 11:55:31.077"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${GET_WEATHER_CITIES}</arg>
+<arg>headers=${headers}</arg>
+<arg>params=${rec_zone}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200507 11:55:32.240" level="INFO">Get Request using : alias=weather, uri=box/city, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'} json=None</msg>
+<msg timestamp="20200507 11:55:32.240" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:31.077" endtime="20200507 11:55:32.240"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:32.242" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:32.241" endtime="20200507 11:55:32.242"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:31.074" endtime="20200507 11:55:32.242"></status>
+</kw>
+<kw name="Então validar o retorno da requisição GET para o endpoint get_weather_rectangle_zone" library="kw_weather">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:32.245" level="INFO">Length is 4</msg>
+<status status="PASS" starttime="20200507 11:55:32.243" endtime="20200507 11:55:32.245"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<assign>
+<var>${SUCCESS_STATUS_CODE}</var>
+</assign>
+<msg timestamp="20200507 11:55:32.247" level="INFO">${SUCCESS_STATUS_CODE} = 200</msg>
+<status status="PASS" starttime="20200507 11:55:32.246" endtime="20200507 11:55:32.247"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${SUCCESS_STATUS_CODE}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:32.247" endtime="20200507 11:55:32.249"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>calctime</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:32.250" endtime="20200507 11:55:32.251"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cnt</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:32.251" endtime="20200507 11:55:32.253"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cod</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:32.253" endtime="20200507 11:55:32.254"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>list</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:32.254" endtime="20200507 11:55:32.255"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:32.243" endtime="20200507 11:55:32.255"></status>
+</kw>
+<tags>
+<tag>get_weather_rectangle_zone</tag>
+<tag>weather</tag>
+</tags>
+<status status="PASS" starttime="20200507 11:55:31.073" endtime="20200507 11:55:32.255" critical="yes"></status>
+</test>
+<test id="s1-s1-t6" name="Cenário: GET weather of cities in cycle">
+<kw name="Quando realizar um GET para o endpoint get_weather_cities_in_cycle" library="kw_weather">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${HOST_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>cookies=${headers}</arg>
+<arg>verify=false</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200507 11:55:32.258" level="INFO">Creating Session using : alias=weather, url=https://samples.openweathermap.org/data/2.5, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'},                     cookies={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200507 11:55:32.257" endtime="20200507 11:55:32.259"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${GET_WEATHER_CITIES_CYCLE}</arg>
+<arg>headers=${headers}</arg>
+<arg>params=${cities_cycle}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200507 11:55:33.222" level="INFO">Get Request using : alias=weather, uri=/find, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'} json=None</msg>
+<msg timestamp="20200507 11:55:33.223" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:32.260" endtime="20200507 11:55:33.223"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:33.224" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:33.223" endtime="20200507 11:55:33.224"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:32.257" endtime="20200507 11:55:33.225"></status>
+</kw>
+<kw name="Então validar o retorno da requisição GET para o endpoint get_weather_cities_in_cycle" library="kw_weather">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:33.227" level="INFO">Length is 4</msg>
+<status status="PASS" starttime="20200507 11:55:33.226" endtime="20200507 11:55:33.228"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<assign>
+<var>${SUCCESS_STATUS_CODE}</var>
+</assign>
+<msg timestamp="20200507 11:55:33.229" level="INFO">${SUCCESS_STATUS_CODE} = 200</msg>
+<status status="PASS" starttime="20200507 11:55:33.228" endtime="20200507 11:55:33.229"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${SUCCESS_STATUS_CODE}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:33.229" endtime="20200507 11:55:33.231"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cod</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:33.231" endtime="20200507 11:55:33.232"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>count</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:33.233" endtime="20200507 11:55:33.234"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>list</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:33.234" endtime="20200507 11:55:33.235"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>message</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:33.236" endtime="20200507 11:55:33.237"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:33.225" endtime="20200507 11:55:33.237"></status>
+</kw>
+<tags>
+<tag>get_weather_cities_in_cycle</tag>
+<tag>weather</tag>
+</tags>
+<status status="PASS" starttime="20200507 11:55:32.256" endtime="20200507 11:55:33.237" critical="yes"></status>
+</test>
+<test id="s1-s1-t7" name="Cenário: GET weather several cities ID">
+<kw name="Quando realizar um GET para o endpoint get_weather_several_cities_id" library="kw_weather">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${HOST_WEATHER}</arg>
+<arg>headers=${headers}</arg>
+<arg>cookies=${headers}</arg>
+<arg>verify=false</arg>
+<arg>disable_warnings=1</arg>
+</arguments>
+<msg timestamp="20200507 11:55:33.240" level="INFO">Creating Session using : alias=weather, url=https://samples.openweathermap.org/data/2.5, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'},                     cookies={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200507 11:55:33.239" endtime="20200507 11:55:33.243"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>${SESSION}</arg>
+<arg>${GET_WEATHER_GROUP}</arg>
+<arg>headers=${headers}</arg>
+<arg>params=${group_cities}</arg>
+</arguments>
+<assign>
+<var>${RESPONSE}</var>
+</assign>
+<msg timestamp="20200507 11:55:34.250" level="INFO">Get Request using : alias=weather, uri=/group, headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate, br', 'User-Agent': 'PostmanRuntime/7.24.0', 'Cache-Control': 'no-cache', 'Accept': '*/*'} json=None</msg>
+<msg timestamp="20200507 11:55:34.251" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:33.243" endtime="20200507 11:55:34.251"></status>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${RESPONSE}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:34.253" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20200507 11:55:34.252" endtime="20200507 11:55:34.253"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:33.239" endtime="20200507 11:55:34.253"></status>
+</kw>
+<kw name="Então validar o retorno da requisição GET para o endpoint get_weather_several_cities_id" library="kw_weather">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+</arguments>
+<msg timestamp="20200507 11:55:34.255" level="INFO">Length is 2</msg>
+<status status="PASS" starttime="20200507 11:55:34.254" endtime="20200507 11:55:34.255"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>200</arg>
+</arguments>
+<assign>
+<var>${SUCCESS_STATUS_CODE}</var>
+</assign>
+<msg timestamp="20200507 11:55:34.256" level="INFO">${SUCCESS_STATUS_CODE} = 200</msg>
+<status status="PASS" starttime="20200507 11:55:34.256" endtime="20200507 11:55:34.257"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${SUCCESS_STATUS_CODE}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:34.257" endtime="20200507 11:55:34.259"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>cnt</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:34.259" endtime="20200507 11:55:34.260"></status>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<arguments>
+<arg>${RESPONSE.json()}</arg>
+<arg>list</arg>
+</arguments>
+<status status="PASS" starttime="20200507 11:55:34.261" endtime="20200507 11:55:34.261"></status>
+</kw>
+<status status="PASS" starttime="20200507 11:55:34.253" endtime="20200507 11:55:34.261"></status>
+</kw>
+<tags>
+<tag>get_weather_several_cities_id</tag>
+<tag>weather</tag>
+</tags>
+<status status="PASS" starttime="20200507 11:55:33.238" endtime="20200507 11:55:34.262" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200507 11:55:25.908" endtime="20200507 11:55:34.265"></status>
+</suite>
+<status status="PASS" starttime="20200507 11:55:25.868" endtime="20200507 11:55:34.272"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="7" fail="0">Critical Tests</stat>
+<stat pass="7" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">get_weather_by_city_id</stat>
+<stat pass="1" fail="0">get_weather_by_city_name</stat>
+<stat pass="1" fail="0">get_weather_by_city_zip</stat>
+<stat pass="1" fail="0">get_weather_by_geo_coord</stat>
+<stat pass="1" fail="0">get_weather_cities_in_cycle</stat>
+<stat pass="1" fail="0">get_weather_rectangle_zone</stat>
+<stat pass="1" fail="0">get_weather_several_cities_id</stat>
+<stat pass="7" fail="0">weather</stat>
+</tag>
+<suite>
+<stat pass="7" fail="0" id="s1" name="Tests">Tests</stat>
+<stat pass="7" fail="0" id="s1-s1" name="Weather">Tests.Weather</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
