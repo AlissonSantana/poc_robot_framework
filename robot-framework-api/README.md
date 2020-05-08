@@ -1,5 +1,5 @@
 
-## Automação Web com Robot Framework
+## Automação API com Robot Framework
 
 ## Instalar
 
