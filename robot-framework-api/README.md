@@ -27,5 +27,5 @@ resources
  -  support
     -   arquivos com suporte para automação, environments, URI etc.
 results - Pasta com relatório do cenários executados e logs para consulta
-test - Especificações dos cenários automatizados do CCAP
+test - Especificações dos cenários automatizados
 requirements - Arquivo com bibliotecas versionadas utilizadas no projeto com Robot Framework
